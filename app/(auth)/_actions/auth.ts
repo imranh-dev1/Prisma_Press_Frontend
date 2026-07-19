@@ -1,12 +1,14 @@
 'use server';
 
-interface LoginState {
+import { cookies } from "next/headers";
+
+export interface LoginState {
     success: boolean;
     statusCode: number;
     message: string;
     data?: {
         accessToken: string;
-        refreshToken: string;
+        refressToken: string;
     };
 }
 
@@ -22,7 +24,32 @@ export const loginAction = async (prevState: LoginState, formData: FormData) => 
             },
             body: JSON.stringify({ email, password }),
         });
-        return await response.json();
+
+        const result: LoginState = await response.json();
+
+        // console.log(result)
+
+        if (result.success && result.data) {
+            const cookieStore = await cookies();
+
+            cookieStore.set("accessToken", result.data.accessToken, {
+                httpOnly: true,
+                secure: process.env.NODE_ENV === "production",
+                sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+                path: "/",
+                maxAge: 60 * 60 * 24,
+            });
+
+            cookieStore.set("refreshToken", result.data.refressToken, {
+                httpOnly: true,
+                secure: process.env.NODE_ENV === "production",
+                sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+                path: "/",
+                maxAge: 60 * 60 * 24 * 7,
+            });
+        }
+
+        return result;
 
     } catch {
         return {

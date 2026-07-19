@@ -10,14 +10,20 @@ import {
   FieldSeparator,
 } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
-import { loginAction } from "../_actions/auth"
-import { useActionState, useEffect } from "react"
+import { loginAction, LoginState } from "../_actions/auth"
 import { Spinner } from "@/components/ui/spinner"
 import { toast } from "sonner"
+import { useActionState, useEffect } from "react"
 
 export default function LoginForm({ className, ...props }: React.ComponentProps<"div">) {
 
-  const [state, action, pending] = useActionState(loginAction, false);
+  const initialState: LoginState = {
+    success: false,
+    statusCode: 0,
+    message: "",
+  };
+
+  const [state, action, pending] = useActionState(loginAction, initialState);
 
   useEffect(() => {
     if (!state) return;
@@ -67,14 +73,7 @@ export default function LoginForm({ className, ...props }: React.ComponentProps<
               </Field>
               <Field>
                 <Button type="submit" disabled={pending}>
-                  {pending ? (
-                    <>
-                      <Spinner className="mr-2 h-4 w-4" />
-                      Logging in...
-                    </>
-                  ) : (
-                    "Login"
-                  )}
+                  {pending ? (<> <Spinner className="mr-2 h-4 w-4" /> Logging in...</>) : ("Login")}
                 </Button>
               </Field>
               <FieldSeparator className="*:data-[slot=field-separator-content]:bg-card">
