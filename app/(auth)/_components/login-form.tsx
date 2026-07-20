@@ -17,13 +17,7 @@ import { useActionState, useEffect } from "react"
 
 export default function LoginForm({ className, ...props }: React.ComponentProps<"div">) {
 
-  const initialState: LoginState = {
-    success: false,
-    statusCode: 0,
-    message: "",
-  };
-
-  const [state, action, pending] = useActionState(loginAction, initialState);
+  const [state, action, pending] = useActionState(loginAction, false);
 
   useEffect(() => {
     if (!state) return;

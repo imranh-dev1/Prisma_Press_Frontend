@@ -3,6 +3,7 @@ import { Geist, Geist_Mono, Oxanium } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import { Toaster } from "sonner";
+import { Navbar } from "@/components/shared/Navbar";
 
 const geistHeading = Geist({ subsets: ['latin'], variable: '--font-heading' });
 
@@ -24,14 +25,17 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children, }: Readonly<{ children: React.ReactNode; }>) {
+
   return (
     <html lang="en" suppressHydrationWarning className={cn("h-full", "antialiased", geistSans.variable, geistMono.variable, "font-sans", oxanium.variable, geistHeading.variable)}>
+
       {/* Navbar */}
+      <body className="min-h-full flex flex-col " suppressHydrationWarning>
+        {children}
+        <Toaster position="bottom-right" richColors />
+      </body>
 
-
-      <body className="min-h-full flex flex-col" suppressHydrationWarning>{children}</body>
       {/* Toaster meassage */}
-      <Toaster position="bottom-right" richColors />
 
       {/* Footer */}
     </html>
