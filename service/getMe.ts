@@ -21,13 +21,18 @@ export const getMe = async () => {
             // cookies: `accessToken=${accessToken}` 
         },
         credentials: 'include',
+        cache: 'force-cache',
+        next: {
+            revalidate: 60 * 60 * 24,
+            tags: ['my-profile'],
+        },
     });
 
     if (!res.ok) {
         throw new Error(`Failed to fetch user: ${res.status}`);
-    }
+    };
 
-    const resut = await res.json();
-    // console.log(resut.data)
-    return resut?.data;
+    const result = await res.json();
+    
+    return result?.data;
 };

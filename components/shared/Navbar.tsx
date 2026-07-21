@@ -11,7 +11,7 @@ import {
     SheetTitle,
     SheetTrigger,
 } from "@/components/ui/sheet"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import logo from "../../public/logo.png"
 import Image from "next/image"
 import { DropdownMenuAvatar } from "./DropdownMenuAvatar"
@@ -56,7 +56,7 @@ export function Navbar({ user }: { user: UserInterface }) {
 
                 {/* Desktop actions */}
                 {
-                    user ? <DropdownMenuAvatar user={user} /> :
+                    user.email ? <DropdownMenuAvatar user={user} /> :
                         <div className="hidden items-center gap-2 md:flex">
                             <Button variant="ghost" >
                                 <Link href="/login">Sign in</Link>
