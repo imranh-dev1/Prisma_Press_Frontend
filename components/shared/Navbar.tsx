@@ -15,6 +15,9 @@ import { useState } from "react"
 import logo from "../../public/logo.png"
 import Image from "next/image"
 import { DropdownMenuAvatar } from "./DropdownMenuAvatar"
+import { UserInterface } from "@/types/user"
+
+
 
 const navLinks = [
     { label: "Home", href: "/" },
@@ -23,7 +26,7 @@ const navLinks = [
     { label: "Docs", href: "/docs" },
 ];
 
-export function Navbar({ user }) {
+export function Navbar({ user }: { user: UserInterface }) {
     const [open, setOpen] = useState(false);
 
     return (
@@ -53,15 +56,16 @@ export function Navbar({ user }) {
 
                 {/* Desktop actions */}
                 {
-                    user ? <DropdownMenuAvatar user={user} /> : <div className="hidden items-center gap-2 md:flex">
-                        <Button variant="ghost" >
-                            <Link href="/login">Sign in</Link>
-                        </Button>
+                    user ? <DropdownMenuAvatar user={user} /> :
+                        <div className="hidden items-center gap-2 md:flex">
+                            <Button variant="ghost" >
+                                <Link href="/login">Sign in</Link>
+                            </Button>
 
-                        <Button >
-                            <Link href="/register">Get Started</Link>
-                        </Button>
-                    </div>
+                            <Button >
+                                <Link href="/register">Get Started</Link>
+                            </Button>
+                        </div>
                 }
 
                 {/* Mobile actions */}

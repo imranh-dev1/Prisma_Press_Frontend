@@ -26,22 +26,19 @@ import {
     DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { UserInterface } from "@/types/user";
 
-export function DropdownMenuAvatar({ user }) {
+export function DropdownMenuAvatar({ user }: { user: UserInterface }) {
+
     return (
         <DropdownMenu>
             <DropdownMenuTrigger>
                 <Button
                     variant="ghost"
                     size="icon"
-                    className="rounded-full h-10 w-10 p-0"
-                >
+                    className="rounded-full h-10 w-10 p-0">
                     <Avatar className="h-10 w-10 border">
-                        <AvatarImage
-                            src=""
-                            alt="Imran Hossain"
-                        />
-                        <AvatarFallback>IH</AvatarFallback>
+                        <AvatarImage src={user.profile?.profilePhoto} alt={user.name} /> :
                     </Avatar>
                 </Button>
             </DropdownMenuTrigger>
@@ -55,11 +52,7 @@ export function DropdownMenuAvatar({ user }) {
                     <DropdownMenuLabel className="pb-2">
                         <div className="flex items-center gap-3">
                             <Avatar className="h-10 w-10">
-                                <AvatarImage
-                                    src="https://github.com/shadcn.png"
-                                    alt="Imran Hossain"
-                                />
-                                <AvatarFallback>IH</AvatarFallback>
+                                <AvatarImage src={user.profile?.profilePhoto} alt={user.name} /> :
                             </Avatar>
 
                             <div className="flex flex-col">

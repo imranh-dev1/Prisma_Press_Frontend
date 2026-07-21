@@ -27,5 +27,7 @@ export const getMe = async () => {
         throw new Error(`Failed to fetch user: ${res.status}`);
     }
 
-    return res.json();
+    const resut = await res.json();
+    // console.log(resut.data)
+    return resut?.data;
 };
