@@ -11,7 +11,6 @@ import {
 
 import {
     Avatar,
-    AvatarFallback,
     AvatarImage,
 } from "@/components/ui/avatar";
 
@@ -27,8 +26,17 @@ import {
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { UserInterface } from "@/types/user";
+import { logout } from "@/service/logout";
+import { redirect } from "next/navigation";
+import { toast } from "sonner";
 
 export function DropdownMenuAvatar({ user }: { user: UserInterface }) {
+
+    const handleLogout = async () => {
+        await logout();
+        toast.success("User Logout successfully...")
+        redirect('/login');
+    };
 
     return (
         <DropdownMenu>
@@ -117,7 +125,7 @@ export function DropdownMenuAvatar({ user }: { user: UserInterface }) {
 
                 <DropdownMenuSeparator />
 
-                <DropdownMenuItem className="text-red-500 focus:text-red-500">
+                <DropdownMenuItem onClick={handleLogout} className="text-red-500 focus:text-red-500">
                     <LogOut className="mr-2 h-4 w-4" />
                     Sign Out
                 </DropdownMenuItem>

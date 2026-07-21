@@ -2,6 +2,7 @@
 
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+import { toast } from "sonner";
 
 export interface LoginState {
     success: boolean;
@@ -31,8 +32,7 @@ export const loginAction = async (prevState: LoginState, formData: FormData) => 
     // console.log(result)
 
     if (result.success && result.data) {
-        const cookieStore = await cookies();
-
+        const cookieStore = await cookies(); 
         cookieStore.set("accessToken", result.data.accessToken, {
             httpOnly: true,
             secure: process.env.NODE_ENV === "production",
