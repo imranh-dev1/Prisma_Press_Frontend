@@ -40,15 +40,13 @@ export function DropdownMenuAvatar({ user }: { user: UserInterface }) {
 
     return (
         <DropdownMenu>
-            <DropdownMenuTrigger>
-                <Button
-                    variant="ghost"
-                    size="icon"
-                    className="rounded-full h-10 w-10 p-0">
-                    <Avatar className="h-10 w-10 border">
-                        <AvatarImage src={user.profile?.profilePhoto} alt={user.name} /> :
-                    </Avatar>
-                </Button>
+            <DropdownMenuTrigger className="rounded-full">
+                <Avatar className="h-10 w-10 border">
+                    <AvatarImage
+                        src={user.profile?.profilePhoto}
+                        alt={user.name}
+                    />
+                </Avatar>
             </DropdownMenuTrigger>
 
             <DropdownMenuContent
