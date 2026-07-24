@@ -6,9 +6,11 @@ export default async function RootLayout({ children, }: Readonly<{ children: Rea
     // console.log(user)
 
     return (
-        < div className="" >
+        < div className="min-h-screen" >
             <Navbar user={user} />
-            {children}
+            <div className="container mx-auto">
+                {children}
+            </div>
         </div >
     );
 }

@@ -11,7 +11,7 @@ import {
     SheetTitle,
     SheetTrigger,
 } from "@/components/ui/sheet"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import logo from "../../public/logo.png"
 import Image from "next/image"
 import { DropdownMenuAvatar } from "./DropdownMenuAvatar"
@@ -21,9 +21,11 @@ import { UserInterface } from "@/types/user"
 
 const navLinks = [
     { label: "Home", href: "/" },
+    { label: "News", href: "/news" },
+    { label: "Premium", href: "/premium" },
+    { label: "Pricing", href: "/payment" },
     { label: "About", href: "/about" },
-    { label: "Pricing", href: "/pricing" },
-    { label: "Docs", href: "/docs" },
+    { label: "Contact", href: "/contact" },
 ];
 
 export function Navbar({ user }: { user: UserInterface }) {
@@ -31,7 +33,7 @@ export function Navbar({ user }: { user: UserInterface }) {
 
     return (
         <header className="sticky top-0 z-50 w-full border-b border-border bg-background/80 backdrop-blur-md">
-            <div className="mx-auto flex h-20 container items-center justify-between gap-4 px-4 md:px-6">
+            <div className="mx-auto flex h-20 container items-center justify-between gap-4 px-4 md:px-0">
                 {/* Brand */}
                 <Link href="/" className="flex items-center gap-2" aria-label="Home">
                     <Image className="w-14 h-14" src={logo} alt="logo" />
